@@ -1,19 +1,17 @@
 class Solution {
 public:
+//Riya Malik
     bool isAnagram(string s, string t) {
         if(s.size()!=t.size()) return false;
-        unordered_map<char, int> mp;
+        vector<int> hash(26, 0);
 
-        for(auto &ch: s){
-            mp[ch]++;
+        for(int i=0; i<s.size(); i++){
+            hash[s[i]-'a']++;
+            hash[t[i]-'a']--;
         }
 
-        for(auto &it: t){
-            if(mp.find(it)!=mp.end()){
-             mp[it]--;
-             if(mp[it]==0) mp.erase(it);
-            }
-            else return false;
+        for(int i=0; i<26; i++){
+            if(hash[i]!=0) return false;
         }
         return true;
     }
